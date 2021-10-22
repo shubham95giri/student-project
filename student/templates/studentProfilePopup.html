@@ -1,0 +1,28 @@
+<div id="user_profile_modal" class="modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Student Detail</h5>
+        <button type="button" class="close close_modal_popup" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+            <b>Student Name</b> : {{ student_detail.student_name }} <br>
+            <b>Father's Name</b> : {{ student_detail.father_name }} <br>
+            <b>DOB</b> : {{ student_detail.dob }} <br>
+            <b>Class</b> : {{ student_detail.class_opted }} <br>
+            <b>Percentage</b> : {{ student_detail.marks }} <br>
+            <b>City</b> : {{ student_detail.city }} <br>
+            <b>State</b> : {{ student_detail.state }} <br>
+            <b>Pin</b> : {{ student_detail.pin }} <br>
+            <b>Email</b> : {{ student_detail.email }} <br>
+            <b>Date Enrolled</b> : {{ student_detail.date_enrolled }} <br>
+            
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary close_modal_popup" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.css" />
+    <title>Student Registration</title>
+    <style>
+        .error{
+            color:red
+        }
+    </style>
+  </head>
+  <body>
+    <h3>Student Registration</h3>
+ 
+    <form id="create_student_form" action="/createstudent" method="post">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="name">Student Name<sup class="error">*</sup>:</label>
+                <input type="text" class="form-control" value="{{ student_detail.student_name }}" name="student_name" id="student_name">
+            </div>
+            <div class="form-group">
+                <label for="name">Father's Name:</label>
+                <input type="text" class="form-control" value="{{ student_detail.father_name }}" name="father_name" id="fathers_name">
+            </div>
+
+            <div class="form-group">
+                <label for="name">DOB:</label>
+                <input type="text" class="form-control" value = "{{student_detail.dob|date:"Y-m-d"}}" name="dob" id="dob">
+            </div>
+
+            <div class="form-group">
+                <label for="name">Address:</label>
+                <input type="text" class="form-control" value = "{{student_detail.address}}" name = "address" id="address">
+            </div>
+
+            <div class="form-group">
+                <label for="name">City:</label>
+                <input type="text" class="form-control" value = "{{student_detail.city}}" name="city" id="city">
+            </div>
+
+            <div class="form-group">
+                <label for="name">state:</label>
+                <input type="text" class="form-control" value = "{{student_detail.state}}" name="state" id="state">
+            </div>
+
+            <div class="form-group">
+                <label for="name">pin:</label>
+                <input type="number" class="form-control" value = "{{student_detail.pin}}" name="pin" id="pin">
+            </div>
+
+            <div class="form-group">
+                <label for="name">Phone no:</label>
+                <input type="number" class="form-control" value = "{{student_detail.phoneNo}}" name="phone_number" id="phone">
+            </div>
+
+            <div class="form-group">
+                <label for="name">Email:</label>
+                <input type="email" class="form-control" value = "{{student_detail.email}}" name="email_address" id="email_address">
+            </div>
+
+            <div class="form-group">
+                <label for="name">class opted(5-10):</label>
+                <select class="form-control" name="class_opted" id="class_opted">
+                    <option value="">select</option>
+                    <option value="5" {% if student_detail.class_opted == '5' %} selected {% endif %} >5</option>
+                    <option value="6" {% if student_detail.class_opted == '6' %} selected {% endif %} >6</option>
+                    <option value="7" {% if student_detail.class_opted == '7' %} selected {% endif %}>7</option>
+                    <option value="8" {% if student_detail.class_opted == '8' %} selected {% endif %}>8</option>
+                    <option value="9" {% if student_detail.class_opted == '9' %} selected {% endif %}>9</option>
+                    <option value="10" {% if student_detail.class_opted == '10' %} selected {% endif %}>10</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="name">Marks %:</label>
+                <input type="number" class="form-control" value= "{{student_detail.marks}}" name="marks" id="marks">
+            </div>
+
+            <div class="form-group">
+                <label for="name"> Date enrolled:</label>
+                <input type="text" class="form-control" value = "{{ student_detail.date_enrolled|date:"Y-m-d" }}" name="date_enrolled" id="date_enrolled">
+            </div>
+             {% csrf_token %}
+            <input type="hidden" name="student_id" id="student_id" value = "{{ student_detail.id }}">
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+    </form>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $('#dob').datetimepicker({
+
+                format:'Y-m-d',
+                timepicker: false,
+            });
+
+            $('#date_enrolled').datetimepicker({
+
+                format:'Y-m-d',
+                timepicker: false,
+            });
+
+            $('#create_student_form').validate({
+                rules:{
+
+                    student_name:{
+                        required:true,
+                    },
+                    father_name:{
+                        required:true
+                    },
+                    dob:{
+                        required: true
+                    },
+                    address:{
+                        required: true
+                    },
+                    city:{
+                        required: true
+                    },
+                    state:{
+                        required: true
+                    },
+                    phone_number:{
+                        required: true
+                    },
+                    email_address:{
+                        required: true
+                    },
+                    marks:{
+                        required: true
+                    },
+                    class_opted:{
+                        required: true
+                    }
+
+
+
+                },
+                submitHandler: function(){
+
+                    $.ajax({
+                        url: '/createstudent',
+                        type: 'POST',
+                        dataType: 'json',
+                        data: $('#create_student_form').serialize(),
+                        success:function(data){
+
+                            if(data.error==0){
+                                alert(data.message);
+                                window.location.replace('/');
+                            }else{
+                                alert(data.message);
+                            }
+                        }
+                    });                   
+                }
+            });
+        });
+    </script>
+  </body>
+</html>

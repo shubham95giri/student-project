@@ -18,7 +18,6 @@ def add_student(request, id=None):
 def student_profile(request, id=None):
     if(id != None):
         student = Student.objects.get(id=id)
-        print(student)
     else:
         student = []
     return render(request,'studentProfilePopup.html', {'student_detail': student})
